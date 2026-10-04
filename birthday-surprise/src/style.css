@@ -1,0 +1,98 @@
+:root {
+  --black: #10070D;
+  --maroon: #31091D;
+  --pink: #FF4F93;
+  --soft: #FFB6D5;
+  --rose: #F52F70;
+  --white: #FFF8FC;
+  --purple: #C58BFF;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Nunito Variable', 'Nunito', system-ui, sans-serif;
+  --font-hand: 'Caveat', cursive;
+  --glow: 0 0 18px rgba(255, 79, 147, .65), 0 0 42px rgba(245, 47, 112, .35);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+html, body { margin: 0; min-height: 100%; background: var(--black); overflow-x: hidden; }
+body {
+  font-family: var(--font-body);
+  color: var(--white);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  -webkit-tap-highlight-color: transparent;
+}
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+img, video, svg { max-width: 100%; }
+:focus-visible { outline: 3px solid var(--soft); outline-offset: 3px; border-radius: 12px; }
+
+/* ---------- Layout halaman ---------- */
+.page {
+  position: relative; z-index: 2;
+  min-height: 100svh;
+  padding: 92px 20px 48px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: 18px;
+}
+.page > * { max-width: 100%; }
+
+/* ---------- Tipografi ---------- */
+.eyebrow { font-size: .8rem; letter-spacing: .22em; color: var(--soft); font-weight: 700; margin: 0; }
+.title {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(2.5rem, 10vw, 4.8rem); line-height: 1.02; margin: 0;
+  color: var(--white); text-shadow: var(--glow);
+  text-wrap: balance;
+}
+.subtitle { margin: 0; color: var(--soft); font-size: 1.15rem; font-family: var(--font-display); font-style: italic; font-weight: 600; }
+.lead { max-width: 34rem; margin: 0; color: rgba(255, 248, 252, .86); }
+
+/* ---------- Komponen umum ---------- */
+.glass {
+  background: rgba(255, 182, 213, .08);
+  border: 1px solid rgba(255, 182, 213, .28);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .12);
+}
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  border: 0; border-radius: 999px; padding: 15px 30px; min-height: 52px;
+  font-weight: 800; letter-spacing: .02em; text-decoration: none; color: #fff;
+  background: linear-gradient(135deg, var(--pink), var(--rose));
+  box-shadow: 0 0 22px rgba(255, 79, 147, .55), inset 0 1px 0 rgba(255, 255, 255, .35);
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+.btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 0 34px rgba(255, 79, 147, .85); }
+.btn:active { transform: scale(.97); }
+.btn[disabled], .btn.is-disabled { opacity: .45; pointer-events: none; }
+.btn-ghost {
+  background: rgba(255, 182, 213, .08); border: 1.5px solid rgba(255, 182, 213, .5);
+  box-shadow: none; color: var(--soft);
+}
+.btn-ghost:hover { background: rgba(255, 182, 213, .18); box-shadow: 0 0 20px rgba(255, 79, 147, .35); }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 8px; }
+
+/* ---------- Transisi halaman ---------- */
+.page-enter-active, .page-leave-active { transition: opacity .55s ease, transform .55s ease, filter .55s ease; }
+.page-enter-from { opacity: 0; transform: translateY(24px) scale(.97); filter: blur(10px); }
+.page-leave-to { opacity: 0; transform: scale(1.03); filter: blur(8px); }
+
+.fade-enter-active, .fade-leave-active { transition: opacity .5s ease, transform .5s ease; }
+.fade-enter-from, .fade-leave-to { opacity: 0; transform: translateY(14px); }
+
+/* ---------- Animasi bersama ---------- */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-12px); } 40% { transform: translateX(10px); }
+  60% { transform: translateX(-8px); } 80% { transform: translateX(6px); }
+}
+.shake { animation: shake .45s ease; }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
